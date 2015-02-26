@@ -19,6 +19,7 @@ public class NetUtils {
     public static String getIPAddress(){
         String result = null;
         Enumeration<NetworkInterface> interfaces = null;
+        boolean addressFound=false;
         try {
             interfaces = NetworkInterface.getNetworkInterfaces();
         } catch (SocketException e) {
@@ -26,7 +27,7 @@ public class NetUtils {
         }
 
         if (interfaces != null) {
-            while (interfaces.hasMoreElements() && result==null) {
+            while (interfaces.hasMoreElements() && !addressFound) {
                 NetworkInterface i = interfaces.nextElement();
                 Enumeration<InetAddress> addresses = i.getInetAddresses();
                 while (addresses.hasMoreElements() && (result == null || result.isEmpty())) {
@@ -34,6 +35,7 @@ public class NetUtils {
                     if (!address.isLoopbackAddress()  &&
                             address.isSiteLocalAddress()) {
                         result = address.getHostAddress();
+                        addressFound=true;
                     }
                 }
             }
