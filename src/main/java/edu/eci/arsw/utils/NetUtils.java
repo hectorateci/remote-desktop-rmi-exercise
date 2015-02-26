@@ -5,6 +5,7 @@
  */
 package edu.eci.arsw.utils;
 
+import java.net.ConnectException;
 import java.net.InetAddress;
 import java.net.NetworkInterface;
 import java.net.SocketException;
@@ -16,14 +17,14 @@ import java.util.Enumeration;
  */
 public class NetUtils {
     
-    public static String getIPAddress(){
+    public static String getIPAddress() throws ConnectException{
         String result = null;
         Enumeration<NetworkInterface> interfaces = null;
         boolean addressFound=false;
         try {
             interfaces = NetworkInterface.getNetworkInterfaces();
         } catch (SocketException e) {
-            // handle error
+            throw new ConnectException("Unable to get network interfaces.");
         }
 
         if (interfaces != null) {
