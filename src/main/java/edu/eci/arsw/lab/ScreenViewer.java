@@ -1,5 +1,6 @@
 package edu.eci.arsw.lab;
 
+import edu.eci.arsw.utils.NetUtils;
 import javax.imageio.ImageIO;
 
 import java.io.ByteArrayInputStream;
@@ -28,7 +29,8 @@ public class ScreenViewer{
 	
 	public static void main(String[] args) throws java.io.IOException, AWTException, InterruptedException, ScreenCaptureException {
 		 
-		
+            System.out.println("IP address:"+NetUtils.getIPAddress());
+            
 		JFrame canvas = new JFrame();				
 		canvas.setLayout(new BorderLayout());
 		
